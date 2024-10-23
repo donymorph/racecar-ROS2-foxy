@@ -93,12 +93,12 @@ def generate_launch_description():
 
     # rviz - 3D visualizer for the Robot Operating System (ROS) framework.
     rviz_config_file = os.path.join(package_dir, 'config', 'racecar.rviz')
-    rviz_config2_file = os.path.join('/home/car/racecarROS2/src/racecar_bringup/config', 'racecar.rviz')
+    # rviz_config2_file = os.path.join('/home/car/racecarROS2/src/racecar_bringup/config', 'racecar.rviz')
     rviz_node = Node(
         package='rviz2',
         executable='rviz2',
         name='rviz2',
-        arguments=['-d', rviz_config2_file],
+        arguments=['-d', rviz_config_file],
     )
     # ls01g model lidar launch
     lidar_node = Node(
