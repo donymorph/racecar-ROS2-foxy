@@ -58,5 +58,8 @@ gmail - dony_uzbguy@gmail.com
 
 twitter - [@dony_morph](https://x.com/dony_morph)
 
+## Other version
 
-
+* ros1 noetic - https://github.com/JiaNing-Z/racecar
+* ros1 kinetic - https://github.com/ART-Robot-Release/racecar
+* ros1 melodic - https://github.com/ART-Robot-Release/racecar/tree/melodic
