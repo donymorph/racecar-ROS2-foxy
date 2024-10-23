@@ -1,0 +1,141 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 10  # Set your desired update rate
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    tricycle_controller:
+      type: tricycle_controller/TricycleController
+
+    ackermann_steering_controller:
+      type: ackermann_steering_controller/AckermannSteeringController
+
+ackermann_steering_controller:
+  ros__parameters:
+    # Model
+    left_wheel_name: front_left_wheel_joint 
+    right_wheel_name: front_right_wheel_joint 
+    rear_wheel_name: traction_joint
+    front_steer_name: steering_joint
+    wheel_separation: 0.33
+    wheels_per_side: 2
+    wheel_radius: 0.06 # Radius of front wheel
+    wheel_separation_multiplier: 1.0
+    left_wheel_radius_multiplier: 1.0
+    right_wheel_radius_multiplier: 1.0
+
+    # Odometry
+    odom_frame_id: odom
+    base_frame_id: base_link
+    publish_rate: 50.0 # publish rate of odom and tf
+    open_loop: false # if True, uses cmd_vel instead of hardware interface feedback to compute odometry
+    enable_odom_tf: false # If True, publishes odom<-base_link TF
+    odom_only_twist: true # If True, publishes on /odom only linear.x and angular.z; Useful for computing odometry in another node, e.g robot_localization's ekf
+    pose_covariance_diagonal: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0] # Need to be set if fusing odom with other localization source
+    twist_covariance_diagonal: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0] # Need to be set if fusing odom with other localization source
+
+
+    # Rate Limiting
+    # Velocity and acceleration limits
+    linear:
+      x:
+        has_velocity_limits: true
+        max_velocity: 1.0      # Max linear velocity in m/s
+        min_velocity: -1.0     # Min linear velocity in m/s
+        has_acceleration_limits: true
+        max_acceleration: 1.0  # Max linear acceleration in m/s^2
+        min_acceleration: -1.0 # Min linear acceleration in m/s^2
+    angular:
+      z:
+        has_velocity_limits: true
+        max_velocity: 1.0      # Max angular velocity in rad/s
+        min_velocity: -1.0     # Min angular velocity in rad/s
+        has_acceleration_limits: true
+        max_acceleration: 0.5  # Max angular acceleration in rad/s^2
+        min_acceleration: -0.5 # Min angular acceleration in rad/s^2
+
+    # Command velocity timeout in seconds
+    cmd_vel_timeout: 0.5
+
+    # Publishing limited velocity
+    publish_limited_velocity: true
+
+    # Use stamped velocities
+    use_stamped_vel: false
+
+    # Velocity rolling window size
+    velocity_rolling_window_size: 10
+    # cmd_vel input
+    cmd_vel_timeout: 0.5 # In milliseconds. Timeout to stop if no cmd_vel is received
+
+
+tricycle_controller:
+  ros__parameters:
+    # Model
+    traction_joint_name: traction_joint # Name of traction joint in URDF
+    steering_joint_name: steering_joint # Name of steering joint in URDF
+    wheel_radius: 0.06 # Radius of front wheel
+    wheelbase: 0.50 # Distance between center of back wheels and front wheel
+
+    # Odometry
+    odom_frame_id: odom
+    base_frame_id: base_link
+    publish_rate: 50.0 # publish rate of odom and tf
+    open_loop: false # if True, uses cmd_vel instead of hardware interface feedback to compute odometry
+    enable_odom_tf: false # If True, publishes odom<-base_link TF
+    odom_only_twist: false # If True, publishes on /odom only linear.x and angular.z; Useful for computing odometry in another node, e.g robot_localization's ekf
+    pose_covariance_diagonal: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0] # Need to be set if fusing odom with other localization source
+    twist_covariance_diagonal: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0] # Need to be set if fusing odom with other localization source
+    velocity_rolling_window_size: 10 # Rolling window size of rcppmath::RollingMeanAccumulator applied on linear and angular speeds published on odom
+
+    # Rate Limiting
+    traction: # All values should be positive
+       min_velocity: 0.0
+       max_velocity: 5.0
+      # min_acceleration: 0.0
+      # max_acceleration: 5.0
+      # min_deceleration: 0.0
+      # max_deceleration: 8.0
+      # min_jerk: 0.0
+      # max_jerk: 1000.0
+    steering:
+      min_position: -0.7854
+      max_position: 0.7854
+      min_velocity: 0.0
+      max_velocity: 5.0
+      # min_acceleration: 0.0
+      # max_acceleration: 1000.0
+
+    # cmd_vel input
+    cmd_vel_timeout: 500 # In milliseconds. Timeout to stop if no cmd_vel is received
+    use_stamped_vel: false # Set to True if using TwistStamped.
+
+    # Debug
+    publish_ackermann_command: false # Publishes AckermannDrive. The speed does not comply to the msg definition, it the wheel angular speed in rad/s.
+
+
+
+
+    # steering:
+    #   type: position_controllers/JointGroupPositionController
+
+    # motor:
+    #   type: velocity_controllers/JointGroupVelocityController
+
+# steering:
+#   ros__parameters:
+#       joints:
+#         - steering_joint  # Correctly specify the joint
+#       state_interface: 
+#         - position
+#       command_interface:
+#         - position
+# motor:
+#   ros__parameters:
+#       joints:
+#         - motor_joint  # Correctly specify the joint
+#       state_interface: 
+#         - velocity
+#       command_interface:
+#         - velocity

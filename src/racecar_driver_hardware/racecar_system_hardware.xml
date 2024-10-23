@@ -1,0 +1,5 @@
+<library path="racecar_driver_hardware">
+  <class name="racecar_driver_hardware/RacecarSystemHardware" type="racecar_system::RacecarSystemHardware" base_class_type="hardware_interface::SystemInterface">
+    <description>Racecar System Hardware Interface</description>
+  </class>
+</library>

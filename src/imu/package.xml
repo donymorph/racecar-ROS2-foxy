@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>imu</name>
+  <version>0.2.0</version>
+  <description>The dony_imu package</description>
+  <maintainer email="zhangnan@artrobot.com">Steven Zhang previous maintainer</maintainer>
+  
+  <maintainer email="dony.uzbguy@gmail.com">ADAMBAEV DONIYORBEK</maintainer>
+
+  <author>the first author Steven Zhang</author>
+  <author>the second author ADAMBAEV DONIYORBEK converted ROS1 to ROS2</author>
+  <license>BSD</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <exec_depend>rclcpp</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>tf2</exec_depend>
+  <exec_depend>tf2_ros</exec_depend>
+  <exec_depend>Eigen3</exec_depend>
+  <build_depend>boost</build_depend>
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

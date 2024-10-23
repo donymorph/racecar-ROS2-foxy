@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<robot name="racing_car" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <!-- Include other Xacro files -->
+  <xacro:include filename="$(find racecar_driver_hardware)/urdf/properties.xacro"/>
+  <xacro:include filename="$(find racecar_driver_hardware)/urdf/chassis.xacro"/>
+  <xacro:include filename="$(find racecar_driver_hardware)/urdf/wheels.xacro"/>
+  <xacro:include filename="$(find racecar_driver_hardware)/urdf/sensors.xacro"/>
+  <xacro:include filename="$(find racecar_driver_hardware)/urdf/ros2_control.xacro"/>
+
+</robot>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+        }
+        canvas {
+            display: block;
+        }
+    </style>
+    <title>Racecar Teleop</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/eventemitter2@6.4.9/lib/eventemitter2.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/roslib@1/build/roslib.min.js"></script>  
+</head>
+<body>
+    <canvas id="joystickCanvas"></canvas>
+    <script>// Prevent the default pull-to-refresh behavior on mobile devices
+    document.addEventListener('touchmove', function(event) {
+        if (event.touches.length > 1 || (event.touches.length === 1 && event.touches[0].pageY < document.body.clientHeight)) {
+            event.preventDefault();
+        }
+    }, { passive: false });
+    </script>
+    <script src="./vector.js"></script>
+    <script src="./joystick.js"></script>
+    <script src="./main.js"></script>
+</body>
+</html>
